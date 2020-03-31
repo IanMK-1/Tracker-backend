@@ -20,6 +20,9 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    def __repr__(self):
+        return self.user
+
 
 class Device(models.Model):
     device_identifier = models.CharField(max_length=30, unique=True)
@@ -27,6 +30,9 @@ class Device(models.Model):
     description = models.TextField()
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.device_identifier
 
 
 class GPSCoordinate(models.Model):
@@ -38,6 +44,9 @@ class GPSCoordinate(models.Model):
 
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.device_identifier
+
 
 class SecondaryCircuit(models.Model):
     device_identifier = models.CharField(max_length=30)
@@ -46,3 +55,6 @@ class SecondaryCircuit(models.Model):
     received_on = models.DateTimeField(auto_now_add=True)
 
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.device_identifier
