@@ -30,7 +30,7 @@ class Device(models.Model):
 
 
 class GPSCoordinate(models.Model):
-    device_id = models.CharField()
+    device_id = models.CharField(max_length=30)
     command = models.CharField(max_length=30)
     longitude = models.FloatField()
     latitude = models.FloatField()
@@ -40,7 +40,7 @@ class GPSCoordinate(models.Model):
 
 
 class SecondaryCircuit(models.Model):
-    device_id = models.CharField()
+    device_id = models.CharField(max_length=30)
     command = models.CharField(max_length=30)
     message = models.TextField()
     received_on = models.DateTimeField(auto_now_add=True)
