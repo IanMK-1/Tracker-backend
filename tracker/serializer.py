@@ -14,4 +14,9 @@ class DeviceSerializer(serializers.ModelSerializer):
         fields = ('device_identifier', 'name', 'description')
 
 
+class GPSSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GPSCoordinate
+        fields = '__all__'
+
 
