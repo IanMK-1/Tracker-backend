@@ -20,3 +20,10 @@ class GPSSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class SecondaryCircuitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SecondaryCircuit
+        fields = '__all__'
+
+
+
