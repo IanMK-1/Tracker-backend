@@ -60,3 +60,9 @@ class CreateDevice(generics.ListCreateAPIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class DeviceList(generics.ListAPIView):
+    def get_queryset(self):
+        devices = Device.objects.filter(user_id=self.kwargs["pk"])
+        return devices
+
+    serializer_class = DeviceSerializer
