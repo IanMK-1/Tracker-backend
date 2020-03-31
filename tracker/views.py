@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import generics, status
 from rest_framework.response import Response
@@ -39,16 +38,25 @@ class UpdateUserProfile(generics.UpdateAPIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CreateDevice(generics.CreateAPIView):
+class CreateDevice(generics.ListCreateAPIView):
+    def get_queryset(self):
+        queryset = Device.objects.filter(user_id=self.kwargs["pk"])
+        return queryset
+
+    serializer_class = DeviceSerializer
+
     def post(self, request, *args, **kwargs):
-        user = User.objects.filter(pk=self.kwargs["pk"])
-        device_identifier = request.data.get("device_identifier")
-        name = request.data.get("name")
-        description = request.data.get("description")
-        data = {"device_identifier": device_identifier, "name": name, "description": description, "user": user}
-        serializer = DeviceSerializer(data=data)
+        try:
+            user = User.objects.get(pk=self.kwargs["pk"])
+        except ObjectDoesNotExist:
+            return Response({"User does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+
+        device = Device(user=user)
+        serializer = DeviceSerializer(device, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+

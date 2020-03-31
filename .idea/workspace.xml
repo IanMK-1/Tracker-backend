@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39b541d0-978b-415a-9829-c0bb94863ee6" name="Default Changelist" comment="" />
+    <list default="true" id="39b541d0-978b-415a-9829-c0bb94863ee6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tracker/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tracker/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ZtOc1Ivoeen69luCQjJ8cJceF6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -31,13 +38,13 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1504" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585660108920">
+    <state x="1504" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585672974251">
       <screen x="1366" y="0" width="1360" height="768" />
     </state>
-    <state x="1504" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1299.741/1366.0.1360.768@1366.0.1360.768" timestamp="1585660108920" />
-    <state x="1702" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1585655002503">
+    <state x="1504" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1299.741/1366.0.1360.768@1366.0.1360.768" timestamp="1585672974251" />
+    <state x="1702" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1585670888843">
       <screen x="1366" y="0" width="1360" height="768" />
     </state>
-    <state x="1702" y="210" key="com.intellij.ide.util.TipDialog/67.27.1299.741/1366.0.1360.768@1366.0.1360.768" timestamp="1585655002503" />
+    <state x="1702" y="210" key="com.intellij.ide.util.TipDialog/67.27.1299.741/1366.0.1360.768@1366.0.1360.768" timestamp="1585670888843" />
   </component>
 </project>
