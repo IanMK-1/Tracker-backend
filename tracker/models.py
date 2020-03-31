@@ -5,6 +5,12 @@ from django.dispatch import receiver
 from cloudinary.models import CloudinaryField
 
 
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
 # Create your models here.
 class Profile(models.Model):
     name = models.CharField(max_length=30, blank=True)
