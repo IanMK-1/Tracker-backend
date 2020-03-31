@@ -37,3 +37,18 @@ class UpdateUserProfile(generics.UpdateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CreateDevice(generics.CreateAPIView):
+    def post(self, request, *args, **kwargs):
+        user = User.objects.filter(pk=self.kwargs["pk"])
+        device_identifier = request.data.get("device_identifier")
+        name = request.data.get("name")
+        description = request.data.get("description")
+        data = {"device_identifier": device_identifier, "name": name, "description": description, "user": user}
+        serializer = DeviceSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
