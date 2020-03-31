@@ -14,3 +14,20 @@ class UserCreate(generics.CreateAPIView):
     serializer_class = UserSerializer
 
 
+class UserProfile(generics.RetrieveUpdateAPIView):
+    def get_queryset(self):
+        queryset = Profile.objects.filter(user_id=self.kwargs["pk"])
+        return queryset
+
+    serializer_class = ProfileSerializer
+
+    def put(self, request, *args, **kwargs):
+        profile = Profile.objects.get(user_id=self.kwargs["pk"])
+        serializer = ProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
