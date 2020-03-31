@@ -22,7 +22,7 @@ class Profile(models.Model):
 
 
 class Device(models.Model):
-    device_id = models.CharField(unique=True)
+    device_identifier = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
     description = models.TextField()
 
@@ -30,7 +30,7 @@ class Device(models.Model):
 
 
 class GPSCoordinate(models.Model):
-    device_id = models.CharField(max_length=30)
+    device_identifier = models.CharField(max_length=30)
     command = models.CharField(max_length=30)
     longitude = models.FloatField()
     latitude = models.FloatField()
@@ -40,7 +40,7 @@ class GPSCoordinate(models.Model):
 
 
 class SecondaryCircuit(models.Model):
-    device_id = models.CharField(max_length=30)
+    device_identifier = models.CharField(max_length=30)
     command = models.CharField(max_length=30)
     message = models.TextField()
     received_on = models.DateTimeField(auto_now_add=True)
