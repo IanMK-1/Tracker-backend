@@ -19,3 +19,10 @@ class Profile(models.Model):
     profile_pic = CloudinaryField('image', blank=True)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+class Device(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
