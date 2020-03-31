@@ -15,7 +15,11 @@ class UserCreate(generics.CreateAPIView):
 
 class UserProfile(generics.ListAPIView):
     def get_queryset(self):
-        queryset = Profile.objects.filter(user_id=self.kwargs["pk"])
+        try:
+            queryset = Profile.objects.filter(user_id=self.kwargs["pk"])
+        except ObjectDoesNotExist:
+            return Response({"Profile does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+
         return queryset
 
     serializer_class = ProfileSerializer
@@ -40,7 +44,11 @@ class UpdateUserProfile(generics.UpdateAPIView):
 
 class CreateDevice(generics.ListCreateAPIView):
     def get_queryset(self):
-        queryset = Device.objects.filter(user_id=self.kwargs["pk"])
+        try:
+            queryset = Device.objects.filter(user_id=self.kwargs["pk"])
+        except ObjectDoesNotExist:
+            return Response({"Device does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+
         return queryset
 
     serializer_class = DeviceSerializer
@@ -62,7 +70,41 @@ class CreateDevice(generics.ListCreateAPIView):
 
 class DeviceList(generics.ListAPIView):
     def get_queryset(self):
-        devices = Device.objects.filter(user_id=self.kwargs["pk"])
+        try:
+            devices = Device.objects.filter(user_id=self.kwargs["pk"])
+        except ObjectDoesNotExist:
+            return Response({"Device does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+
         return devices
 
     serializer_class = DeviceSerializer
+
+
+class CreateGPS(generics.ListCreateAPIView):
+    def get_queryset(self):
+        try:
+            gps = GPSCoordinate.objects.filter(device_device_identifier=self.kwargs["device_identifier"])
+        except ObjectDoesNotExist:
+            return Response({"Device does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+
+        return gps
+
+    serializer_class = GPSSerializer
+
+    def post(self, request, *args, **kwargs):
+        try:
+            device = Device.objects.get(device_identifier=self.kwargs["device_identifier"])
+        except ObjectDoesNotExist:
+            return Response({"Device does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+
+        command = self.kwargs["command"]
+        longitude = self.kwargs["longitude"]
+        latitude = self.kwargs["latitude"]
+        data = {"device_identifier": self.kwargs["device_identifier"], "command": command, "longitude": longitude,
+                "latitude": latitude, "device": device.id}
+        serializer = GPSSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
