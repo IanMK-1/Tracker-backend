@@ -26,3 +26,20 @@ class Device(models.Model):
     description = models.TextField()
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class GPSCoordinate(models.Model):
+    command = models.CharField(max_length=30)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
+    received_on = models.DateTimeField(auto_now_add=True)
+
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+
+
+class SecondaryCircuit(models.Model):
+    command = models.CharField(max_length=30)
+    message = models.TextField()
+    received_on = models.DateTimeField(auto_now_add=True)
+
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
