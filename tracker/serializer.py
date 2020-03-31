@@ -8,4 +8,10 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ('name', 'bio', 'location', 'profile_pic')
 
 
+class DeviceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Device
+        fields = ('device_identifier', 'name', 'description')
+
+
 
